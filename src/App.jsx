@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className='w-1/4 h-48 bg-green-600'></div>
+      <div>hello react</div>
     </>
   );
 }
