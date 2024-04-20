@@ -42,11 +42,15 @@ function submitTask(){
         id="lists-div"
         className="w-2/4 flex flex-col items-center mb-32 gap-4 pt-5"
       >
+      {taskArr.map(item=>{
+
          <div id="list" className="w-3/4 h-20 bg-slate-100 flex justify-between items-end">
           <div id="circle" className="w-20 h-20 bg-amber-400 rounded-r-full flex justify-center items-center text-5xl font-sans font-bold"> <h1>1</h1></div>
-          <div id="circle" className="w-3/4 h-20  flex justify-center items-center font-sans"> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum consequuntur iure nostrum laborum! Enim, excepturi.</p></div>
-          <div id="circle" className="w-8 h-8 bg-black flex justify-center items-center text-1xl font-sans text-white font-semibold"> <h3>X</h3></div>
+          <div id="text" className="w-3/4 h-20  flex justify-center items-center font-sans"> <p>{item}</p></div>
+          <div id="delBtn" className="w-8 h-8 bg-black flex justify-center items-center text-1xl font-sans text-white font-semibold"> <h3>X</h3></div>
         </div>
+
+      })}
     
       </div>
       
