@@ -1,6 +1,26 @@
 import React from 'react'
+import { useState,useRef,useEffect } from 'react';
 
 function Login() {
+  const [email, setemail] = useState(null);
+  const [pass, setPass] = useState(null);
+  const inpRef = useRef(null)
+  const pasRef = useRef(null)
+
+  function getData(){
+    let data = inpRef.current.value;
+    let pass = pasRef.current.value;
+    setemail(data);
+    setPass(pass);
+  }
+  useEffect(() => {
+    
+    console.log(email);
+    console.log(pass);
+  
+    
+  }, [email,pass])
+  
   return (
     <>
     {/*
@@ -30,6 +50,7 @@ function Login() {
                 id="email"
                 name="email"
                 type="email"
+                ref={inpRef}
                 autoComplete="email"
                 required
                 className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
@@ -48,6 +69,7 @@ function Login() {
               <input
                 id="password"
                 name="password"
+                ref={pasRef}
                 type="password"
                 autoComplete="current-password"
                 required
@@ -59,6 +81,7 @@ function Login() {
           <div>
             <button
               type="submit"
+              onClick={getData}
               className="flex w-full justify-center rounded-md bg-amber-400 px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
             >
               Sign in
