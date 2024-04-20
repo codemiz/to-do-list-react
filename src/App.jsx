@@ -10,7 +10,7 @@ let array = [];
 function App() {
   return (
     <>
-      <Navbar one="Sign in" home="Home" two="Sign up" />
+      <Navbar one="Profile" home="Home" two="Settings" />
      <Homepage/>
       <Footer/>
     </>
