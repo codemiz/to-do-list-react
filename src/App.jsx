@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 import Footer from "./Footer";
 import Homepage from "./Homepage";
+import Signup from "./Signup";
 
 let array = [];
 
@@ -11,7 +12,8 @@ function App() {
   return (
     <>
       <Navbar one="Mark's profile" home="Home" two="Log Out" />
-     <Homepage/>
+      
+     <Signup/>
       <Footer/>
     </>
   );
