@@ -22,13 +22,10 @@ useEffect( () => {
      fetchData();
   }, [])
   
-  async function submitTask(){
+async function submitTask(){
     const dataToSend = {
       inputTask: task
     }
-  
-
-  
   settask("");
 try{
   const response = await fetch("http://localhost:3000/api/task/data",{
@@ -40,7 +37,7 @@ try{
     console.log("Data sent successfully");
     fetchData();
   } else {
-    console.error("Failed to send data");
+    console.error("Failed to send id");
   }
   }
   catch(err){
@@ -48,11 +45,26 @@ try{
   }
 
 }
-function deleteBtn(key){
-  const newArr = [...taskArr];
-  newArr.splice(key,1);
-  settaskArr(newArr);
-console.log(key);
+async function deleteBtn(id){
+    const sendId = {taskId: id};
+  try{
+      const response = await fetch("http://localhost:3000/delete/task",{
+        method:"DELETE",
+        headers:{ 'Content-Type': 'application/json'},
+        body: JSON.stringify(sendId)
+      })
+      if (response.ok) {
+        console.log("Id sent successfully");
+        fetchData();
+      } else {
+        console.error("Failed to send data");
+      }
+  }
+  catch(err){
+        console.log(err);
+  }
+
+console.log(id);
 }
 
   return (
@@ -91,7 +103,7 @@ console.log(key);
           <div id="circle" className="w-20 h-20 bg-amber-400 rounded-r-full flex justify-center items-center text-5xl font-sans font-bold"> <h1>{index+1}</h1></div>
           <div id="text" className="w-3/4 h-20  flex justify-start items-center font-sans"> 
           <p>{item.task}</p></div>
-          <div id="delBtn" className="w-8 h-8 bg-black flex justify-center items-center hover:cursor-pointer text-1xl font-sans hover:text-amber-400 text-white font-semibold" onClick={()=>{deleteBtn(index)}}> <h3>X</h3></div>
+          <div id="delBtn" className="w-8 h-8 bg-black flex justify-center items-center hover:cursor-pointer text-1xl font-sans hover:text-amber-400 text-white font-semibold" onClick={()=>{deleteBtn(item._id)}}> <h3>X</h3></div>
         </div>
     
 
