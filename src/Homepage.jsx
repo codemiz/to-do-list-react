@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Homepage() {
   const [task, settask] = useState("");
@@ -8,10 +8,43 @@ function handleChanges(e){
   const data = e.target.value;
   settask(data);
 }
-function submitTask(){
+useEffect( () => {
+  async function fetchData(){
+    try{
+      const response = await fetch("http://localhost:3000/api/to/data");
+      const data = response.json();
+      console.log(data);
+    }catch(err){
+      console.error(err);
+    }
+     }
+     fetchData();
+  }, [])
+  
+  async function submitTask(){
+    const dataToSend = {
+      inputTask: task
+    }
   settaskArr([...taskArr,task]);
+
   console.log(taskArr);
   settask("");
+try{
+  const response = await fetch("http://localhost:3000/api/task/data",{
+    method: "POST",
+    headers:{ 'Content-Type': 'application/json'},
+    body: JSON.stringify(dataToSend)
+  })
+  if (response.ok) {
+    console.log("Data sent successfully");
+  } else {
+    console.error("Failed to send data");
+  }
+  }
+  catch(err){
+    console.log(err);
+  }
+
 }
 function deleteBtn(key){
   const newArr = [...taskArr];
