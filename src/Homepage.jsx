@@ -8,17 +8,17 @@ function handleChanges(e){
   const data = e.target.value;
   settask(data);
 }
+async function fetchData(){
+  try{
+    const response = await fetch("http://localhost:3000/api/to/data");
+    const data = await response.json();
+    console.log(data);
+    settaskArr(data);
+  }catch(err){
+    console.error(err);
+  }
+   }
 useEffect( () => {
-  async function fetchData(){
-    try{
-      const response = await fetch("http://localhost:3000/api/to/data");
-      const data = await response.json();
-      console.log(data);
-      settaskArr(data);
-    }catch(err){
-      console.error(err);
-    }
-     }
      fetchData();
   }, [])
   
@@ -38,6 +38,7 @@ try{
   })
   if (response.ok) {
     console.log("Data sent successfully");
+    fetchData();
   } else {
     console.error("Failed to send data");
   }
