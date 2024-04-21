@@ -12,8 +12,9 @@ useEffect( () => {
   async function fetchData(){
     try{
       const response = await fetch("http://localhost:3000/api/to/data");
-      const data = response.json();
+      const data = await response.json();
       console.log(data);
+      settaskArr(data);
     }catch(err){
       console.error(err);
     }
@@ -25,9 +26,9 @@ useEffect( () => {
     const dataToSend = {
       inputTask: task
     }
-  settaskArr([...taskArr,task]);
+  
 
-  console.log(taskArr);
+  
   settask("");
 try{
   const response = await fetch("http://localhost:3000/api/task/data",{
@@ -87,7 +88,8 @@ console.log(key);
       
          <div key={index} id="list" className="w-3/4 h-20 bg-slate-100 flex justify-between items-end">
           <div id="circle" className="w-20 h-20 bg-amber-400 rounded-r-full flex justify-center items-center text-5xl font-sans font-bold"> <h1>{index+1}</h1></div>
-          <div id="text" className="w-3/4 h-20  flex justify-start items-center font-sans"> <p>{item}</p></div>
+          <div id="text" className="w-3/4 h-20  flex justify-start items-center font-sans"> 
+          <p>{item.task}</p></div>
           <div id="delBtn" className="w-8 h-8 bg-black flex justify-center items-center hover:cursor-pointer text-1xl font-sans hover:text-amber-400 text-white font-semibold" onClick={()=>{deleteBtn(index)}}> <h3>X</h3></div>
         </div>
     
