@@ -5,6 +5,7 @@ import Login from "./Login";
 import Footer from "./Footer";
 import Homepage from "./Homepage";
 import Signup from "./Signup";
+import Profile from "./Profile";
 
 let array = [];
 
@@ -13,7 +14,7 @@ function App() {
     <>
       <Navbar one="Mark's profile" home="Home" two="Log Out" />
       
-     <Signup/>
+     <Profile></Profile>
       <Footer/>
     </>
   );
