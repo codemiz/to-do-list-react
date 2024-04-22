@@ -1,36 +1,23 @@
 import React from 'react'
-import { useState,useRef,useEffect } from 'react';
+import { useState,useEffect } from 'react';
+import { useForm } from "react-hook-form";
 
 function Signup() {
-  const [email, setemail] = useState(null);
-  const [pass, setPass] = useState(null);
-  const inpRef = useRef(null)
-  const pasRef = useRef(null)
-
-  function getData(){
-    let data = inpRef.current.value;
-    let pass = pasRef.current.value;
-    setemail(data);
-    setPass(pass);
+ 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors,isSubmitting },
+  } = useForm()
+ 
+  const onSubmit = (data) =>{
+     console.log(data)
   }
-  useEffect(() => {
-    
-    console.log(email);
-    console.log(pass);
-  
-    
-  }, [email,pass])
-  
+
+
   return (
     <>
-    {/*
-      This example requires updating your template:
-
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    */}
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         
@@ -40,22 +27,21 @@ function Signup() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div>
             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
               Name
             </label>
             <div className="mt-2">
               <input
-                id="name"
-                name="name"
                 type="text"
-                ref={inpRef}
+                {...register("name", {required:{value:true, message: "Name is required"},minLength:{value:3 , message:"Minimum length of name should be 3"}})}
                 autoComplete="name"
-                required
+                
                 className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
             </div>
+          {errors.name && <div className='text-red-600 bg-red mt-2'>{errors.name.message}</div>}
           </div>
 
           <div>
@@ -64,15 +50,14 @@ function Signup() {
             </label>
             <div className="mt-2">
               <input
-                id="email"
-                name="email"
                 type="email"
-                ref={inpRef}
+                {...register("email", {required:{value:true, message: "Email is required"}})}
                 autoComplete="email"
-                required
+              
                 className="block w-full rounded-md p-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
             </div>
+            {errors.email && <div className='text-red-600 bg-red mt-2'>{errors.email.message}</div>}
           </div>
 
           <div>
@@ -84,21 +69,20 @@ function Signup() {
             </div>
             <div className="mt-2">
               <input
-                id="password"
-                name="password"
-                ref={pasRef}
+                {...register("password", {required:{value:true, message: "Password is required"},minLength:{value:3 , message:"Minimum length of password should be 6"}})}
                 type="password"
                 autoComplete="current-password"
-                required
+               
                 className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-500 sm:text-sm sm:leading-6"
               />
             </div>
+            {errors.password && <div className='text-red-600 bg-red mt-2'>{errors.password.message}</div>}
           </div>
 
           <div>
             <button
               type="submit"
-              onClick={getData}
+              disabled={isSubmitting}
               className="flex w-full justify-center rounded-md bg-amber-400 px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
             >
               Sign in
