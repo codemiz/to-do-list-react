@@ -16,23 +16,23 @@ function App() {
   const router = createBrowserRouter([
     {
       path:"/",
-      element: <><Navbar  home="Home" one="Log in" two="Profile" /> <Homepage intro="Login to continue"/></>
+      element: <><Navbar  first="Home" second="Log in" third="Sign up"/> <Homepage intro="Login to continue"/></>
     },
     {
       path:"/login",
-      element: <><Navbar  home="Home" one="Log in" two="Sign up" /> <Login/></>
+      element: <><Navbar  first="Home" second="Log in" third="Sign up" /> <Login/></>
     },
     {
       path:"/signup",
-      element: <><Navbar  home="Home" one="Log in" two="Sign up" /> <Signup/></>
+      element: <><Navbar  first="Home" second="Log in" third="Sign up"/> <Signup/></>
     },
     {
       path:"/profile",
-      element: <><Navbar  home="Home" one="Log in" two="Sign up" /> <Profile/></>
+      element: <><Navbar  first="Home" second="Profile" third="Log out"/> <Profile/></>
     },
   ])
   return (
-    <>
+  <>
       
       <RouterProvider router={router} />
      
