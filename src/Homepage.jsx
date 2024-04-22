@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Homepage() {
+function Homepage(props) {
   const [task, settask] = useState("");
   const [taskArr, settaskArr] = useState([])
 
@@ -90,7 +90,7 @@ console.log(id);
           Submit
         </button>
       </div>
-<div id="center" className="w-2/4 h-10 flex  mt-10  mb-5 justify-center"> <div className="w-2/4 h-full bg-black flex justify-center text-white items-center font-bold"><h3>Your To Do List</h3></div> </div>
+<div id="center" className="w-2/4 h-10 flex  mt-10  mb-5 justify-center"> <div className="w-2/4 h-full bg-black flex justify-center text-white items-center font-bold"><h3>{props.intro}</h3></div> </div>
       <div
         id="lists-div"
         className="w-2/4 flex flex-col items-center mb-32 gap-4 pt-5"
