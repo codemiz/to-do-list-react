@@ -17,7 +17,7 @@ function Profile() {
         >
           <div className="flex gap-4 text-xl">
           <h4 className="font-bold">Email:</h4>
-          <p className="font-semibold">email@email.com</p></div>
+          <p className="font-semibold">example@email.com</p></div>
           <button className="w-56 h-14 bg-amber-400 font-semibold rounded-md hover:bg-black hover:text-orange-300">Change email</button>
         </div>
         <div
