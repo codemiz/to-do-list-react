@@ -1,8 +1,8 @@
 {
+  "homepage": "https://nexuswarp.github.io/to-do-list-react/",
   "name": "todo-list",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://nexuswarp.github.io/to-do-list-react/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
