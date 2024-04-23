@@ -15,28 +15,23 @@ import { AuthContext } from "./context/AuthContext";
 
 
 function App() {
-  const authContext = useContext(AuthContext);
-  const [user, setUser] = useState(authContext ? authContext.user : null);
-
-  useEffect(() => {
-    setUser(authContext ? authContext.user : null);
-  }, [authContext]);
+  
   const router = createBrowserRouter([
     {
       path:"/",
-      element: <><Navbar  first="Home" second={user?"Profile":"Log in"} third={user?"Log out":"Sign up"}/> <Homepage/></>
+      element: <><Navbar/> <Homepage/></>
     },
     {
       path:"/login",
-      element: <><Navbar  first="Home" second="Log in" third="Sign up" /> <Login/></>
+      element: <><Navbar /> <Login/></>
     },
     {
       path:"/signup",
-      element: <><Navbar  first="Home" second="Log in" third="Sign up"/> <Signup/></>
+      element: <><Navbar/> <Signup/></>
     },
     {
       path:"/profile",
-      element: <><Navbar  first="Home" second="Profile" third="Log out"/> <Profile/></>
+      element: <><Navbar /> <Profile/></>
     },
   ])
   return (
