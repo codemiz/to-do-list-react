@@ -1,34 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function Homepage(props) {
   const [task, settask] = useState("");
   const [taskArr, settaskArr] = useState([])
-
-function handleChanges(e){
-  const data = e.target.value;
-  settask(data);
-}
-async function fetchData(){
-  try{
-    const response = await fetch("http://localhost:3000/api/to/data");
+  const { user } = useContext(AuthContext);
+  
+  function handleChanges(e){
+    const data = e.target.value;
+    settask(data);
+  }
+  async function fetchData(){
+    try{
+      if (!user || !user._id) {
+        // User or user._id is null or undefined
+        console.error("User not available");
+        return;
+      }
+    // const userId = user._id;
+    console.log("Fetching data for user:", user);
+    const response = await fetch(`http://localhost:3000/api/get/data/${user._id}`);
     const data = await response.json();
     console.log(data);
+    
     settaskArr(data);
   }catch(err){
     console.error(err);
   }
-   }
+}
 useEffect( () => {
-     fetchData();
-  }, [])
-  
+  if (user && user._id) {
+    fetchData();
+  }
+}, [user])
+
 async function submitTask(){
-    const dataToSend = {
-      inputTask: task
-    }
+  const dataToSend = {
+    inputTask: task
+  }
   settask("");
-try{
-  const response = await fetch("http://localhost:3000/api/task/data",{
+  try{
+  const userId = user._id;
+  const response = await fetch(`http://localhost:3000/api/task/data/${userId}`,{
     method: "POST",
     headers:{ 'Content-Type': 'application/json'},
     body: JSON.stringify(dataToSend)
@@ -37,7 +50,7 @@ try{
     console.log("Data sent successfully");
     fetchData();
   } else {
-    console.error("Failed to send id");
+    console.error("Failed to send data");
   }
   }
   catch(err){
@@ -90,12 +103,13 @@ console.log(id);
           Submit
         </button>
       </div>
-<div id="center" className="w-2/4 h-10 flex  mt-10  mb-5 justify-center"> <div className="w-2/4 h-full bg-black flex justify-center text-white items-center font-bold"><h3>{props.intro}</h3></div> </div>
+<div id="center" className="w-2/4 h-10 flex  mt-10  mb-5 justify-center"> <div className="w-2/4 h-full bg-black flex justify-center text-white items-center font-semibold"><h3>{user ? `Hi ${user.name}, Here is your list`:"Not signed in"}</h3></div> </div>
       <div
         id="lists-div"
         className="w-2/4 flex flex-col items-center mb-32 gap-4 pt-5"
       >
 
+      
       {taskArr.map((item,index)=>(
  
       

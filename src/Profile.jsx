@@ -43,7 +43,7 @@ function Profile() {
           className="w-3/5 h-20  mt-6 flex justify-between items-center font-sans text-x"
         >
           
-          <button className="w-64 h-14 bg-black text-white font-semibold hover:bg-zinc-700 rounded-md hover:text-white">Log out</button>
+          <button onClick={()=>signOut()} className="w-64 h-14 bg-black text-white font-semibold hover:bg-zinc-700 rounded-md hover:text-white">Log out</button>
           <button className="w-64 h-14 bg-amber-400  font-semibold hover:bg-black rounded-md hover:text-orange-300">Change password</button>
         </div>
       </div>

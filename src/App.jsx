@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext,useEffect } from "react";
 import "./App.css";
 import Navbar from "./Navbar";
 import Login from "./Login";
@@ -11,13 +11,20 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 
 
 function App() {
+  const authContext = useContext(AuthContext);
+  const [user, setUser] = useState(authContext ? authContext.user : null);
+
+  useEffect(() => {
+    setUser(authContext ? authContext.user : null);
+  }, [authContext]);
   const router = createBrowserRouter([
     {
       path:"/",
-      element: <><Navbar  first="Home" second="Log in" third="Sign up"/> <Homepage intro="Login to continue"/></>
+      element: <><Navbar  first="Home" second={user?"Profile":"Log in"} third={user?"Log out":"Sign up"}/> <Homepage/></>
     },
     {
       path:"/login",

@@ -30,6 +30,7 @@ function Signup() {
       if (response.ok) {
         console.log("data sent successfully");
         const data = await response.json();
+        console.log(data);
         signIn(data);
       navigate("/");
       } else {
