@@ -1,11 +1,15 @@
 import React from "react";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const { user, signOut } = useContext(AuthContext);
-
-
+  const navigate = useNavigate();
+function logout(){
+  signOut()
+  navigate("/login");
+}
   if (!user) {
     return <div>User not signed in</div>;
   }
@@ -43,7 +47,7 @@ function Profile() {
           className="w-3/5 h-20  mt-6 flex justify-between items-center font-sans text-x"
         >
           
-          <button onClick={()=>signOut()} className="w-64 h-14 bg-black text-white font-semibold hover:bg-zinc-700 rounded-md hover:text-white">Log out</button>
+          <button onClick={()=>logout()} className="w-64 h-14 bg-black text-white font-semibold hover:bg-zinc-700 rounded-md hover:text-white">Log out</button>
           <button className="w-64 h-14 bg-amber-400  font-semibold hover:bg-black rounded-md hover:text-orange-300">Change password</button>
         </div>
       </div>

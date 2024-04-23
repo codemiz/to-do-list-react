@@ -3,6 +3,7 @@ import { useState,useEffect,useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from './context/AuthContext';
+import { Link } from 'react-router-dom';
 
 function Signup() {
  const navigate = useNavigate();
@@ -124,9 +125,9 @@ function Signup() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Already a member?{' '}
-          <a href="#" className="font-semibold leading-6 text-amber-500 hover:text-amber-400">
+          <Link to="/login" className="font-semibold leading-6 text-amber-500 hover:text-amber-400">
             Log in now
-          </a>
+          </Link>
         </p>
       </div>
     </div>

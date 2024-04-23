@@ -1,9 +1,12 @@
 import React from 'react'
-import { useState,useRef,useEffect } from 'react';
+import { useState,useRef,useEffect,useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from './context/AuthContext';
+import { Link } from 'react-router-dom';
 
 function Login() {
+  const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -28,6 +31,7 @@ function Login() {
       console.log("data sent successfully");
     const userData = await response.json()
     console.log(userData);
+    signIn(userData)
     navigate("/");
   } else {
     const userData = await response.json()
@@ -113,9 +117,9 @@ catch(err){
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{' '}
-          <a href="#" className="font-semibold leading-6 text-amber-500 hover:text-amber-400">
+          <Link to="/signup" className="font-semibold leading-6 text-amber-500 hover:text-amber-400">
             Sign up now
-          </a>
+          </Link>
         </p>
       </div>
     </div>
