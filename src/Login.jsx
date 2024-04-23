@@ -9,6 +9,7 @@ function Login() {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors,isSubmitting },
   } = useForm()
  
@@ -18,15 +19,19 @@ function Login() {
       password:data.password
     } 
   try{
-    const response = await fetch("http://localhost:3000/signup/new/user",{
+    const response = await fetch("http://localhost:3000/user/login",{
       method:"POST",
       headers:{ 'Content-Type': 'application/json'},
       body: JSON.stringify(user)
     })
     if (response.ok) {
       console.log("data sent successfully");
-    
-    } else {
+    const userData = await response.json()
+    console.log(userData);
+  } else {
+    const userData = await response.json()
+    console.log(userData);
+    setError("submitErr",{message:userData.error})
       console.error("Failed to send data");
     }
 }
@@ -83,7 +88,7 @@ catch(err){
             <div className="mt-2">
               <input
                 
-                {...register("password", {required:{value:true, message: "Password is required"},minLength:{value:3 , message:"Minimum length of password should be 6"}})}
+                {...register("password", {required:{value:true, message: "Password is required"},minLength:{value:6 , message:"Minimum length of password should be 6"}})}
                 type="password"
                 autoComplete="current-password"
                 
@@ -101,6 +106,7 @@ catch(err){
             >
               Sign in
             </button>
+            {errors.submitErr && <div className='text-red-600 bg-red mt-2'>{errors.submitErr.message}</div>}
           </div>
         </form>
 
