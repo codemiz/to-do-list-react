@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
- 
+ const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -11,7 +12,28 @@ function Signup() {
     formState: { errors,isSubmitting },
   } = useForm()
  
-  const onSubmit = (data) =>{
+  const onSubmit =async (data) =>{
+      const newUser = {
+        name: data.name,
+        email:data.email,
+        password:data.password
+      } 
+    try{
+      const response = await fetch("http://localhost:3000/signup/new/user",{
+        method:"POST",
+        headers:{ 'Content-Type': 'application/json'},
+        body: JSON.stringify(newUser)
+      })
+      if (response.ok) {
+        console.log("data sent successfully");
+      navigate("/");
+      } else {
+        console.error("Failed to send data");
+      }
+  }
+  catch(err){
+        console.log(err);
+  }
      console.log(data)
   }
 
@@ -101,6 +123,7 @@ function Signup() {
   </>
   )
 }
+
 
 export default Signup
 
