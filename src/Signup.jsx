@@ -9,6 +9,7 @@ function Signup() {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors,isSubmitting },
   } = useForm()
  
@@ -29,6 +30,9 @@ function Signup() {
       navigate("/");
       } else {
         console.error("Failed to send data");
+        const data = await response.json();
+        console.log(data);
+        setError("signingErr",{message:data.error})
       }
   }
   catch(err){
@@ -109,6 +113,7 @@ function Signup() {
             >
               Sign in
             </button>
+            {errors.signingErr && <div className='text-red-600 bg-red mt-2'>{errors.signingErr.message}</div>}
           </div>
         </form>
 

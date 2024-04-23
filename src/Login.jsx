@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,6 +28,7 @@ function Login() {
       console.log("data sent successfully");
     const userData = await response.json()
     console.log(userData);
+    navigate("/");
   } else {
     const userData = await response.json()
     console.log(userData);
