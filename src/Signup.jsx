@@ -117,7 +117,7 @@ function Signup() {
               disabled={isSubmitting}
               className="flex w-full justify-center rounded-md bg-amber-400 px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
             >
-              Sign in
+              Sign up
             </button>
             {errors.signingErr && <div className='text-red-600 bg-red mt-2'>{errors.signingErr.message}</div>}
           </div>
