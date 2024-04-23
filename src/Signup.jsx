@@ -1,10 +1,12 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from './context/AuthContext';
 
 function Signup() {
  const navigate = useNavigate();
+ const { signIn } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -27,6 +29,8 @@ function Signup() {
       })
       if (response.ok) {
         console.log("data sent successfully");
+        const data = await response.json();
+        signIn(data);
       navigate("/");
       } else {
         console.error("Failed to send data");

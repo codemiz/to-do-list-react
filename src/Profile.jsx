@@ -1,15 +1,24 @@
 import React from "react";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function Profile() {
+  const { user, signOut } = useContext(AuthContext);
+
+
+  if (!user) {
+    return <div>User not signed in</div>;
+  }
   return (
     <div className="flex justify-center w-full pt-32 selection:bg-amber-400 ">
       <div className="w-2/4 h-3/4 flex justify-center items-center gap-3 flex-col">
+        
         <div
           id="name"
           className="w-3/4 h-40 bg-slate-50 mb-24 drop-shadow-lg flex justify-center items-center font-sans font-bold text-4xl"
         >
           
-          <h1>Micheal FredMan</h1>
+          <h1>{user.name}</h1>
         </div>
         <div
           id="email"
@@ -17,7 +26,7 @@ function Profile() {
         >
           <div className="flex gap-4 text-xl">
           <h4 className="font-bold">Email:</h4>
-          <p className="font-semibold">example@email.com</p></div>
+          <p className="font-semibold">{user.email}</p></div>
           <button className="w-56 h-14 bg-amber-400 font-semibold rounded-md hover:bg-black hover:text-orange-300">Change email</button>
         </div>
         <div
