@@ -13,7 +13,7 @@ function Homepage(props) {
   async function fetchData(){
     try{
       if (!user || !user._id) {
-        // User or user._id is null or undefined
+        
         console.error("User not available");
         return;
       }
