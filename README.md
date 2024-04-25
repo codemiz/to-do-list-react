@@ -1,1 +1,1 @@
-To do list app in react
+To do list app using react js
